@@ -1,0 +1,60 @@
+#include "Windows.h"
+
+129 ACCELERATORS
+BEGIN
+    "A",            40104,                  VIRTKEY, CONTROL, NOINVERT
+    "C",            57634,                  VIRTKEY, CONTROL, NOINVERT
+    "F",            40115,                  VIRTKEY, CONTROL, NOINVERT
+    "L",            40105,                  VIRTKEY, CONTROL, NOINVERT
+    "V",            57637,                  VIRTKEY, CONTROL, NOINVERT
+    "Y",            57644,                  VIRTKEY, CONTROL, NOINVERT
+    "Z",            57643,                  VIRTKEY, CONTROL, NOINVERT
+    "N",            57600,                  VIRTKEY, CONTROL, NOINVERT
+    "O",            40001,                  VIRTKEY, CONTROL, NOINVERT
+    "S",            57603,                  VIRTKEY, CONTROL, NOINVERT
+    "S",            40002,                  VIRTKEY, SHIFT, CONTROL, NOINVERT
+    VK_F12,         40025,                  VIRTKEY, NOINVERT
+    "M",            40040,                  VIRTKEY, CONTROL, NOINVERT
+    "B",            40036,                  VIRTKEY, CONTROL, NOINVERT
+    "P",            40038,                  VIRTKEY, CONTROL, NOINVERT
+    "U",            40043,                  VIRTKEY, CONTROL, NOINVERT
+    "H",            40039,                  VIRTKEY, CONTROL, NOINVERT
+    "R",            40076,                  VIRTKEY, CONTROL, NOINVERT
+    "G",            40042,                  VIRTKEY, CONTROL, NOINVERT
+    "T",            40046,                  VIRTKEY, CONTROL, NOINVERT
+    "C",            40044,                  VIRTKEY, SHIFT, CONTROL, NOINVERT
+    "E",            40045,                  VIRTKEY, CONTROL, NOINVERT
+    "J",            40047,                  VIRTKEY, CONTROL, NOINVERT
+    "K",            40048,                  VIRTKEY, CONTROL, NOINVERT
+    "Q",            40082,                  VIRTKEY, CONTROL, NOINVERT
+    "M",            40037,                  VIRTKEY, SHIFT, CONTROL, NOINVERT
+    "I",            40049,                  VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          40053,                  VIRTKEY, NOINVERT
+    VK_F6,          40054,                  VIRTKEY, NOINVERT
+    VK_F7,          40064,                  VIRTKEY, NOINVERT
+    VK_F8,          40065,                  VIRTKEY, NOINVERT
+    VK_F9,          40066,                  VIRTKEY, NOINVERT
+    VK_F10,         40072,                  VIRTKEY, NOINVERT
+    VK_F11,         40071,                  VIRTKEY, NOINVERT
+    VK_F3,          40092,                  VIRTKEY, NOINVERT
+    VK_F4,          40093,                  VIRTKEY, NOINVERT
+    "W",            40133,                  VIRTKEY, CONTROL, NOINVERT
+    "F",            40134,                  VIRTKEY, SHIFT, CONTROL, NOINVERT
+    VK_F2,          40024,                  VIRTKEY, NOINVERT
+    "T",            40135,                  VIRTKEY, SHIFT, CONTROL, NOINVERT
+    "0",            30050,                  VIRTKEY, CONTROL, NOINVERT
+    "1",            30008,                  VIRTKEY, CONTROL, NOINVERT
+    "2",            30009,                  VIRTKEY, CONTROL, NOINVERT
+    "3",            30010,                  VIRTKEY, CONTROL, NOINVERT
+    "4",            30000,                  VIRTKEY, CONTROL, NOINVERT
+    "5",            30001,                  VIRTKEY, CONTROL, NOINVERT
+    "6",            30002,                  VIRTKEY, CONTROL, NOINVERT
+    "7",            30003,                  VIRTKEY, CONTROL, NOINVERT
+    "8",            30004,                  VIRTKEY, CONTROL, NOINVERT
+    "9",            30005,                  VIRTKEY, CONTROL, NOINVERT
+    "0",            30006,                  VIRTKEY, ALT, NOINVERT
+    "1",            30011,                  VIRTKEY, ALT, NOINVERT
+    "2",            30007,                  VIRTKEY, ALT, NOINVERT
+    "3",            30012,                  VIRTKEY, ALT, NOINVERT
+END
+

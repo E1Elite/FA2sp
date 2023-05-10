@@ -35,8 +35,10 @@ DEFINE_HOOK(4D2F40, CCreateMap3A_OnOK, 5)
 
     pThis->UpdateData();
 
-    if (pThis->MapWidth > 256 || pThis->MapWidth < 1 || pThis->MapHeight > 256 || pThis->MapHeight < 1)
-        ::MessageBox(NULL, "Width and Height must both be between 1 and 256.", "Error", MB_OK);
+    if (pThis->MapWidth > 492 || pThis->MapWidth < 20 || pThis->MapHeight > 492 || pThis->MapHeight < 20)
+        ::MessageBox(NULL, "Width and Height range is from 20 to 492.", "Error", MB_OK);
+    else if (pThis->MapWidth + pThis->MapHeight > 512)
+        ::MessageBox(NULL, "Width + Height cannot exceed 512.", "Error", MB_OK);
     else
         pThis->ppmfc::CDialog::OnOK();
 

@@ -8,6 +8,7 @@
 // Forward Declartion
 struct CScriptTypeAction;
 struct CScriptTypeParam;
+struct CScriptTypeParamCustom;
 class CurrentScript;
 
 class NOVTABLE CScriptTypesExt : public CScriptTypes
@@ -79,6 +80,16 @@ struct CScriptTypeParam {
 
 	ppmfc::CString Label_;
 	int Param_;
+};
+
+struct CScriptTypeParamCustom {
+	static std::map<int, CScriptTypeParamCustom> ExtParamsCustom;
+
+	ppmfc::CString Section_;
+	int LoadFrom_;
+	bool ShowIndex_;
+	int HasExtraParam_;
+	ppmfc::CString XtraSection_;
 };
 
 class CurrentScript {

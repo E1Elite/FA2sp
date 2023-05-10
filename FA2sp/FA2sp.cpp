@@ -57,6 +57,7 @@ bool ExtConfigs::DDrawEmulation;
 bool ExtConfigs::NoHouseNameTranslation;
 bool ExtConfigs::EnableMultiSelection;
 bool ExtConfigs::ExtendedValidationNoError;
+bool ExtConfigs::LoadRA2MixFilesOnly;
 
 MultimapHelper Variables::Rules = { &CINI::Rules(), &CINI::CurrentDocument() };
 MultimapHelper Variables::FAData = { &CINI::FAData() };
@@ -149,18 +150,11 @@ void FA2sp::ExtConfigsInitialize()
 
 	ExtConfigs::NoHouseNameTranslation = CINI::FAData->GetBool("ExtConfigs", "NoHouseNameTranslation");
 
-	ExtConfigs::EnableMultiSelection = CINI::FAData->GetBool("ExtConfigs", "EnableMultiSelection", true);
-	if (!ExtConfigs::EnableMultiSelection)
-	{
-		MessageBox(NULL, 
-			"You have disabled Multi-selection, this tag is supposed to be deprecated in future "
-			"version of FA2sp. So if you are disabling it because of the feature has some problem, "
-			"please report it at https://github.com/secsome/FA2sp/issues. Thanks for your help.",
-			"FA2sp", MB_OK | MB_ICONINFORMATION
-		);
-	}
+	ExtConfigs::EnableMultiSelection = CINI::FAData->GetBool("ExtConfigs", "EnableMultiSelection");
 
 	ExtConfigs::ExtendedValidationNoError = CINI::FAData->GetBool("ExtConfigs", "ExtendedValidationNoError");
+
+	ExtConfigs::LoadRA2MixFilesOnly = CINI::FAData->GetBool("ExtConfigs", "LoadRA2MixFilesOnly");
 }
 
 // DllMain

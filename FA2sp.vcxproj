@@ -143,7 +143,6 @@
     <ClCompile Include="FA2sp\Ext\CChangeMapSize\Hooks.cpp" />
     <ClCompile Include="FA2sp\Ext\CCreateMap2\Hooks.cpp" />
     <ClCompile Include="FA2sp\Ext\CCreateMap3A\Hooks.cpp" />
-    <ClCompile Include="FA2sp\Ext\CEasterEgg\Hooks.cpp" />
     <ClCompile Include="FA2sp\Ext\CFinalSunApp\Body.cpp" />
     <ClCompile Include="FA2sp\Ext\CFinalSunApp\Hooks.cpp" />
     <ClCompile Include="FA2sp\Ext\CFinalSunDlg\Body.cpp" />
@@ -299,29 +298,11 @@
     <ClInclude Include="FA2sp\CncVxlRenderText.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="FA2sp\ExtraWindow\CAllieEditor\CAllieEditor.rc" />
-    <ResourceCompile Include="FA2sp\UI\CAircraftDialog.rc" />
-    <ResourceCompile Include="FA2sp\UI\CAITriggerTypes.rc" />
-    <ResourceCompile Include="FA2sp\UI\CCreateMap2.rc" />
-    <ResourceCompile Include="FA2sp\UI\CInfantryDialog.rc" />
-    <ResourceCompile Include="FA2sp\UI\CLighting.rc" />
-    <ResourceCompile Include="FA2sp\UI\CLoading.rc" />
-    <ResourceCompile Include="FA2sp\UI\CMapValidator.rc" />
-    <ResourceCompile Include="FA2sp\UI\CMenu.rc" />
-    <ResourceCompile Include="FA2sp\UI\CScriptTypes.rc" />
-    <ResourceCompile Include="FA2sp\UI\CSingleplayerSettings.rc" />
-    <ResourceCompile Include="FA2sp\UI\CStructureDialog.rc" />
-    <ResourceCompile Include="FA2sp\UI\CTaskforce.rc" />
-    <ResourceCompile Include="FA2sp\UI\CTriggerFrame.rc" />
-    <ResourceCompile Include="FA2sp\UI\CTriggerOption.rc" />
-    <ResourceCompile Include="FA2sp\UI\CTriggerAction.rc" />
-    <ResourceCompile Include="FA2sp\UI\CTriggerEvent.rc" />
-    <ResourceCompile Include="FA2sp\ExtraWindow\CTileManager\CTileManager.rc" />
-    <ResourceCompile Include="FA2sp\FA2sp.rc" />
-    <ResourceCompile Include="FA2sp\UI\CHouses.rc" />
-    <ResourceCompile Include="FA2sp\UI\CTeamTypes.rc" />
-    <ResourceCompile Include="FA2sp\UI\CTileBrowserFrame.DialogBar.rc" />
-    <ResourceCompile Include="FA2sp\UI\CUnitDialog.rc" />
+    <ResourceCompile Include="FA2sp\UI\Accelerators.rc" />
+    <ResourceCompile Include="FA2sp\UI\Dialogs.rc" />
+    <ResourceCompile Include="FA2sp\UI\Menu.rc" />
+    <ResourceCompile Include="FA2sp\Manifest.rc" />
+    <ResourceCompile Include="FA2sp\Version.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FA2sp\FA2sp.manifest" />

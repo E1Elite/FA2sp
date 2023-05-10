@@ -108,8 +108,13 @@ DEFINE_HOOK(43209D, CFinalSunDlg_Update_TranslateMenuItems, A)
         }
     };
 
-    int i = 0;
-    translateSubMenu(i++, "Menu.File");
+	ppmfc::CString menuName = "";
+	for (int i = 0; i < 9; i++)
+	{
+		menuName.Format("Menu.Name.%d", i);
+	    translateSubMenu(i, menuName);
+	}
+
     translateMenuItem(57600, "Menu.File.New");
     translateMenuItem(40001, "Menu.File.Open");
     translateMenuItem(57603, "Menu.File.Save");
@@ -118,7 +123,6 @@ DEFINE_HOOK(43209D, CFinalSunDlg_Update_TranslateMenuItems, A)
     // translateMenuItem(40017, "Menu.File.RunGame");
     translateMenuItem(40003, "Menu.File.Quit");
 
-    translateSubMenu(i++, "Menu.Edit");
     translateMenuItem(57643, "Menu.Edit.Undo");
     translateMenuItem(57644, "Menu.Edit.Redo");
     translateMenuItem(57634, "Menu.Edit.Copy");
@@ -141,7 +145,6 @@ DEFINE_HOOK(43209D, CFinalSunDlg_Update_TranslateMenuItems, A)
     translateMenuItem(40037, "Menu.Edit.SingleplayerSettings");
     translateMenuItem(40049, "Menu.Edit.INIEditor");
 
-    translateSubMenu(i++, "Menu.Terrain");
     translateMenuItem(40053, "Menu.Terrain.RaiseGround");
     translateMenuItem(40054, "Menu.Terrain.LowerGround");
     translateMenuItem(40064, "Menu.Terrain.FlattenGround");
@@ -152,7 +155,6 @@ DEFINE_HOOK(43209D, CFinalSunDlg_Update_TranslateMenuItems, A)
     translateMenuItem(40062, "Menu.Terrain.RaiseSingleTile");
     translateMenuItem(40063, "Menu.Terrain.LowerSingleTile");
 
-    translateSubMenu(i++, "Menu.MapTools");
     translateMenuItem(40077, "Menu.MapTools.ChangeMapHeight");
     translateMenuItem(40096, "Menu.MapTools.AutoCreateShores");
     translateMenuItem(40085, "Menu.MapTools.AutoLevelUsingCliffs");
@@ -162,15 +164,6 @@ DEFINE_HOOK(43209D, CFinalSunDlg_Update_TranslateMenuItems, A)
     translateMenuItem(40134, "Menu.MapTools.NavigateCoordinate");
     translateMenuItem(40135, "Menu.MapTools.ToolScripts");
 
-    if (0)
-    {
-        translateSubMenu(i++, "Menu.Online");
-        translateMenuItem(40078, "Menu.Online.Westwood");
-        translateMenuItem(40081, "Menu.Online.FA2Fansite");
-        translateMenuItem(40119, "Menu.Online.FA2Forum");
-    }
-
-    translateSubMenu(i++, "Menu.Options");
     translateMenuItem(40004, "Menu.Options.Settings");
     translateMenuItem(40024, "Menu.Options.ShowMinimap");
     translateMenuItem(40023, "Menu.Options.Easymode");
@@ -180,43 +173,47 @@ DEFINE_HOOK(43209D, CFinalSunDlg_Update_TranslateMenuItems, A)
     translateMenuItem(40105, "Menu.Options.DisableAutoLAT");
     translateMenuItem(40120, "Menu.Options.DisableSlopeCorrection");
 
-    translateSubMenu(i++, "Menu.Help");
     translateMenuItem(57670, "Menu.Help.Manual");
     translateMenuItem(40006, "Menu.Help.Info");
     translateMenuItem(40075, "Menu.Help.Credits");
     translateMenuItem(40022, "Menu.Help.TipOfTheDay");
 
-    translateSubMenu(i++, "Menu.Layers");
-    translateMenuItem(30000, "Menu.Layers.Structures");
-    translateMenuItem(30001, "Menu.Layers.Infantries");
-    translateMenuItem(30002, "Menu.Layers.Units");
-    translateMenuItem(30003, "Menu.Layers.Aircrafts");
-    translateMenuItem(30004, "Menu.Layers.Basenodes");
-    translateMenuItem(30005, "Menu.Layers.Waypoints");
-    translateMenuItem(30006, "Menu.Layers.Celltags");
-    translateMenuItem(30007, "Menu.Layers.MoneyOnMap");
-    translateMenuItem(30008, "Menu.Layers.Overlays");
-    translateMenuItem(30009, "Menu.Layers.Terrains");
-    translateMenuItem(30010, "Menu.Layers.Smudges");
-    translateMenuItem(30011, "Menu.Layers.Tubes");
-    translateMenuItem(30012, "Menu.Layers.Bounds");
+    translateMenuItem(30000, "Menu.Display.Structures");
+    translateMenuItem(30001, "Menu.Display.Infantries");
+    translateMenuItem(30002, "Menu.Display.Units");
+    translateMenuItem(30003, "Menu.Display.Aircrafts");
+    translateMenuItem(30004, "Menu.Display.Basenodes");
+    translateMenuItem(30005, "Menu.Display.Waypoints");
+    translateMenuItem(30006, "Menu.Display.Celltags");
+    translateMenuItem(30007, "Menu.Display.MoneyOnMap");
+    translateMenuItem(30008, "Menu.Display.Overlays");
+    translateMenuItem(30009, "Menu.Display.Terrains");
+    translateMenuItem(30010, "Menu.Display.Smudges");
+    translateMenuItem(30011, "Menu.Display.Tubes");
+    translateMenuItem(30012, "Menu.Display.Bounds");
+    translateMenuItem(30050, "Menu.Display.ShowAll");
 
-    translateSubMenu(i++, "Menu.Lighting");
     translateMenuItem(31000, "Menu.Lighting.None");
     translateMenuItem(31001, "Menu.Lighting.Normal");
     translateMenuItem(31002, "Menu.Lighting.Lightning");
     translateMenuItem(31003, "Menu.Lighting.Dominator");
 
-    translateSubMenu(i++, "Menu.PropertyBrush");
     translateMenuItem(32000, "Menu.PropertyBrush.AutoAircraft");
     translateMenuItem(32001, "Menu.PropertyBrush.AutoBuilding");
     translateMenuItem(32002, "Menu.PropertyBrush.AutoInfantry");
     translateMenuItem(32003, "Menu.PropertyBrush.AutoVehicle");
 
+    if (0)
+    {
+        translateMenuItem(40078, "Menu.Online.Westwood");
+        translateMenuItem(40081, "Menu.Online.FA2Fansite");
+        translateMenuItem(40119, "Menu.Online.FA2Forum");
+    }
+
     return 0x432304;
 }
 
-DEFINE_HOOK(432010, CFinalSunDlg_Update_NoFuckingEasyMode, 7)
+DEFINE_HOOK(432010, CFinalSunDlg_Update_EasyModeDisable, 7)
 {
     CFinalSunApp::Instance->EasyMode = false;
     return 0;

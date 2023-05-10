@@ -145,6 +145,18 @@ void CViewObjectsExt::Redraw_Initialize()
             IgnoreSet.insert(tmp);
         }
 
+    CString theaterIg = doc.GetString("Map", "Theater");
+    if (theaterIg != "")
+	{
+		if (theaterIg == "NEWURBAN")
+			theaterIg = "UBN";
+
+        CString suffix = theaterIg.Mid(0, 3);
+		if (auto theater_ignores = fadata.GetSection((ppmfc::CString)("IgnoreRA2" + suffix)))
+			for (auto& item : theater_ignores->GetEntities())
+				IgnoreSet.insert(item.second);
+	}
+
     if (auto forcenames = fadata.GetSection("ForceName"))
         for (auto& item : forcenames->GetEntities())
         {

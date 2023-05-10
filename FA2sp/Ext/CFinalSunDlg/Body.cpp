@@ -40,6 +40,12 @@ BOOL CFinalSunDlgExt::OnCommandExt(WPARAM wParam, LPARAM lParam)
 		this->MyViewFrame.RedrawWindow(nullptr, nullptr, RDW_INVALIDATE | RDW_UPDATENOW);
 	};
 
+	auto SetMenuStatusTrue = [this, &hMenu](int id, bool& param)
+	{
+		param = true;
+		CheckMenuItem(hMenu, id, MF_CHECKED);
+	};
+
 	auto SetLightingStatus = [this, &hMenu](int id)
 	{
 		CheckMenuRadioItem(hMenu, 31000, 31003, id, MF_UNCHECKED);
@@ -99,6 +105,22 @@ BOOL CFinalSunDlgExt::OnCommandExt(WPARAM wParam, LPARAM lParam)
 	case 30012:
 		SetLayerStatus(30012, CIsoViewExt::DrawBounds);
 		return TRUE;
+	case 30050:
+		SetMenuStatusTrue(30000, CIsoViewExt::DrawStructures);
+		SetMenuStatusTrue(30001, CIsoViewExt::DrawInfantries);
+		SetMenuStatusTrue(30002, CIsoViewExt::DrawUnits);
+		SetMenuStatusTrue(30003, CIsoViewExt::DrawAircrafts);
+		SetMenuStatusTrue(30004, CIsoViewExt::DrawBasenodes);
+		SetMenuStatusTrue(30005, CIsoViewExt::DrawWaypoints);
+		SetMenuStatusTrue(30006, CIsoViewExt::DrawCelltags);
+		SetMenuStatusTrue(30007, CIsoViewExt::DrawMoneyOnMap);
+		SetMenuStatusTrue(30008, CIsoViewExt::DrawOverlays);
+		SetMenuStatusTrue(30009, CIsoViewExt::DrawTerrains);
+		SetMenuStatusTrue(30010, CIsoViewExt::DrawSmudges);
+		SetMenuStatusTrue(30011, CIsoViewExt::DrawTubes);
+		SetMenuStatusTrue(30012, CIsoViewExt::DrawBounds);
+		this->MyViewFrame.RedrawWindow(nullptr, nullptr, RDW_INVALIDATE | RDW_UPDATENOW);
+		return TRUE;
 	case 31000:
 	case 31001:
 	case 31002:
@@ -142,10 +164,10 @@ BOOL CFinalSunDlgExt::OnCommandExt(WPARAM wParam, LPARAM lParam)
 		while (true)
 		{
 			const ppmfc::CString title = Translations::TranslateOrDefault(
-				"NavigateCoordTitle", "Navigate to coordinate"
+				"NavigateCoordTitle", "Find Coordinate"
 			);
 			const ppmfc::CString message = Translations::TranslateOrDefault(
-				"NavigateCoordMessage", "Please input the coordinate in the format like X,Y"
+				"NavigateCoordMessage", "Please input coordinate (format):\nX,Y"
 			);
 			const ppmfc::CString invalid_title = Translations::TranslateOrDefault(
 				"NavigateCoordInvalidTitle", "Error!"

@@ -1,0 +1,3 @@
+#include <Windows.h>
+
+101 RT_MANIFEST "FA2sp.manifest"

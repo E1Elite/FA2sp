@@ -60,6 +60,14 @@ bool MultimapHelper::GetBool(ppmfc::CString pSection, ppmfc::CString pKey, bool 
     switch (toupper(static_cast<unsigned char>(*pStr)))
     {
     case '1':
+    case '2':
+    case '3':
+    case '4':
+    case '5':
+    case '6':
+    case '7':
+    case '8':
+    case '9':
     case 'T':
     case 'Y':
         return true;
@@ -140,5 +148,23 @@ std::map<ppmfc::CString, ppmfc::CString, INISectionEntriesComparator> MultimapHe
                     ret[tmp] = pair.second;
                 }
             }         
+    return ret;
+}
+
+std::map<ppmfc::CString, std::vector<ppmfc::CString>, INISectionEntriesComparator> MultimapHelper::GetSectionSplitValues(ppmfc::CString pSection, const char* pSplit = ",")
+{
+    std::map<ppmfc::CString, std::vector<ppmfc::CString>, INISectionEntriesComparator> ret;
+    ppmfc::CString tmp;
+    for (auto& pINI : data)
+        if (pINI)
+            if (auto section = pINI->GetSection(pSection))
+                for (auto& pair : section->GetEntities())
+                    if (!STDHelpers::IsNoneOrEmpty(pair.first) &&
+                        !STDHelpers::IsNoneOrEmpty(pair.second) &&
+                        pair.first != "Name")
+                    {
+	                    tmp.Format("%s", pair.first);
+	                    ret[tmp] = STDHelpers::SplitStringTrimmed(pair.second, pSplit);
+                    }
     return ret;
 }

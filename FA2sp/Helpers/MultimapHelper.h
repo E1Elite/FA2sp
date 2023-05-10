@@ -22,6 +22,7 @@ public:
 
     std::vector<ppmfc::CString> ParseIndicies(ppmfc::CString pSection, bool bParseIntoValue = false);
     std::map<ppmfc::CString, ppmfc::CString, INISectionEntriesComparator> GetSection(ppmfc::CString pSection);
+    std::map<ppmfc::CString, std::vector<ppmfc::CString>, INISectionEntriesComparator> GetSectionSplitValues(ppmfc::CString pSection, const char* pSplit);
 
 private:
     std::vector<CINI*> data;

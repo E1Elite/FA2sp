@@ -228,9 +228,12 @@ DEFINE_HOOK(469470, CIsoView_OnKeyDown, 5)
     if (nChar == 'D')
     {
         if (CIsoView::ControlKeyIsDown)
-            MultiSelection::Clear();
-        else
-            CFinalSunApp::Instance->FlatToGround = !CFinalSunApp::Instance->FlatToGround;
+		{
+			if (MultiSelection::ShiftKeyIsDown)
+				MultiSelection::Clear();
+			else
+				CFinalSunApp::Instance->FlatToGround = !CFinalSunApp::Instance->FlatToGround;
+		}
 
         pThis->RedrawWindow(nullptr, nullptr, RDW_INVALIDATE | RDW_UPDATENOW);
     }
