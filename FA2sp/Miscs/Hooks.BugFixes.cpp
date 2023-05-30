@@ -78,6 +78,7 @@ DEFINE_HOOK(468760, Miscs_GetColor, 7)
 }
 
 // https://modenc.renegadeprojects.com/Cell_Spots
+/*
 DEFINE_HOOK(473E66, CIsoView_Draw_InfantrySubcell, B)
 {
 	GET(int, nX, EDI);
@@ -105,7 +106,7 @@ DEFINE_HOOK(473E66, CIsoView_Draw_InfantrySubcell, B)
 
 	return 0x473E8C;
 }
-
+*/
 // Fix the bug that up&down&left&right vk doesn't update the TileSetBrowserView
 DEFINE_HOOK(422EA4, CFinalSunApp_ProcessMessageFilter_UpdateTileSetBrowserView_UpAndDown, 8)
 {

@@ -4,9 +4,13 @@
 #include <CMixFile.h>
 #include <CINI.h>
 
+#include "../../FA2sp.h"
+
 bool CLoadingExt::InitMixFilesFix()
 {
 	HasMdFile = true;
+    if (ExtConfigs::LoadRA2MixFilesOnly)
+		HasMdFile = false;
 
 	// Load Extra Mixes
 	{
@@ -80,7 +84,10 @@ bool CLoadingExt::InitMixFilesFix()
 	};
 
 	// Init_Bootstrap_Mixfiles
-	ppmfc::CString format = "EXPAND" + CINI::FAData->GetString("Filenames", "MixExtension", "MD") + "%02d.MIX";
+	ppmfc::CString format = "EXPAND";
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		format += "MD";
+	format += "%02d." + CINI::FAData->GetString("Filenames", "MixExtension", "MIX");
 	for (int i = 99; i >= 0; --i)
 	{
 		ppmfc::CString filename; 
@@ -88,11 +95,14 @@ bool CLoadingExt::InitMixFilesFix()
 		LoadMixFile(filename);
 	}
 
-	if (!LoadMixFile("RA2MD.MIX"))		return false;
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		if (!LoadMixFile("RA2MD.MIX"))		return false;
 	if (!LoadMixFile("RA2.MIX"))		return false;
-	if (!LoadMixFile("CACHEMD.MIX"))	return false;
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		if (!LoadMixFile("CACHEMD.MIX"))	return false;
 	if (!LoadMixFile("CACHE.MIX"))		return false;
-	if (!LoadMixFile("LOCALMD.MIX"))	return false;
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		if (!LoadMixFile("LOCALMD.MIX"))	return false;
 	if (!LoadMixFile("LOCAL.MIX"))		return false;
 
 	// Init_Expansion_Mixfiles
@@ -122,62 +132,74 @@ bool CLoadingExt::InitMixFilesFix()
 	}
 
 	// Init_Secondary_Mixfiles
-	if (!LoadMixFile("CONQMD.MIX"))		return false;
-	if (!LoadMixFile("GENERMD.MIX"))	return false;
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+	{
+		if (!LoadMixFile("CONQMD.MIX"))		return false;
+		if (!LoadMixFile("GENERMD.MIX"))	return false;
+	}
 	if (!LoadMixFile("GENERIC.MIX"))	return false;
-	if (!LoadMixFile("ISOGENMD.MIX"))	return false;
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		if (!LoadMixFile("ISOGENMD.MIX"))	return false;
 	if (!LoadMixFile("ISOGEN.MIX"))		return false;
 	if (!LoadMixFile("CONQUER.MIX"))	return false;
 
 	// Init_Theaters
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		LoadMixFile("TEMPERATMD.MIX");
 	LoadMixFile("TEMPERAT.MIX");
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		LoadMixFile("ISOTEMMD.MIX");
 	LoadMixFile("ISOTEMP.MIX");
-	LoadMixFile("ISOTEMMD.MIX");
 	LoadMixFile("TEM.MIX");
-	LoadMixFile("TEMPERATMD.MIX");
 
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		LoadMixFile("SNOWMD.MIX");
 	LoadMixFile("SNOW.MIX");
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		LoadMixFile("ISOSNOMD.MIX");
 	LoadMixFile("ISOSNOW.MIX");
-	LoadMixFile("ISOSNO.MIX");
-	LoadMixFile("ISOSNOMD.MIX");
 	LoadMixFile("SNO.MIX");
-	LoadMixFile("SNOWMD.MIX");
 
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		LoadMixFile("URBANMD.MIX");
 	LoadMixFile("URBAN.MIX");
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+		LoadMixFile("ISOURBMD.MIX");
 	LoadMixFile("ISOURB.MIX");
-	LoadMixFile("ISOURBMD.MIX");
 	LoadMixFile("URB.MIX");
-	LoadMixFile("URBANMD.MIX");
 
-	LoadMixFile("DESERT.MIX");
-	LoadMixFile("ISODES.MIX");
-	LoadMixFile("ISODESMD.MIX");
-	LoadMixFile("DES.MIX");
-	LoadMixFile("DESERTMD.MIX");
+    if (!ExtConfigs::LoadRA2MixFilesOnly)
+	{
+		LoadMixFile("DESERTMD.MIX");
+		LoadMixFile("DESERT.MIX");
+		LoadMixFile("ISODESMD.MIX");
+		LoadMixFile("ISODES.MIX");
+		LoadMixFile("DES.MIX");
 
-	LoadMixFile("URBANN.MIX");
-	LoadMixFile("ISOUBN.MIX");
-	LoadMixFile("ISOUBNMD.MIX");
-	LoadMixFile("UBN.MIX");
-	LoadMixFile("URBANNMD.MIX");
+		LoadMixFile("URBANNMD.MIX");
+		LoadMixFile("URBANN.MIX");
+		LoadMixFile("ISOUBNMD.MIX");
+		LoadMixFile("ISOUBN.MIX");
+		LoadMixFile("UBN.MIX");
 
-	LoadMixFile("LUNAR.MIX");
-	LoadMixFile("ISOLUN.MIX");
-	LoadMixFile("ISOLUNMD.MIX");
-	LoadMixFile("LUN.MIX");
-	LoadMixFile("LUNARMD.MIX");
+		LoadMixFile("LUNARMD.MIX");
+		LoadMixFile("LUNAR.MIX");
+		LoadMixFile("ISOLUNMD.MIX");
+		LoadMixFile("ISOLUN.MIX");
+		LoadMixFile("LUN.MIX");
+	}
 
-	if (LoadMixFile("MARBLE.MIX"))
+	ppmfc::CString FA2MarblePath = CFinalSunApp::ExePath + "\\MARBLE.MIX";
+	int foundMM = CMixFile::Open(FA2MarblePath, 0);
+	if (foundMM)
+	{
+		Logger::Raw("[MixLoader] %04d - %s loaded.\n", foundMM, FA2MarblePath);
 		CFinalSunApp::Instance->MarbleLoaded = TRUE;
+	}
 	else
 	{
-		ppmfc::CString FullPath = CFinalSunApp::ExePath + "\\MARBLE.MIX";
-		int result = CMixFile::Open(FullPath, 0);
-		if (result)
-		{
-			Logger::Raw("[MixLoader] %04d - %s loaded.\n", result, FullPath);
+		if (LoadMixFile("MARBLE.MIX"))
 			CFinalSunApp::Instance->MarbleLoaded = TRUE;
-		}
 		else
 		{
 			CFinalSunApp::Instance->MarbleLoaded = FALSE;

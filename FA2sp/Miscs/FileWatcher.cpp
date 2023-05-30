@@ -31,7 +31,7 @@ void FileWatcher::Callback(std::string path, Status status)
     if (status == Status::Modified)
     {
         const ppmfc::CString message = Translations::TranslateOrDefault(
-            "FileWatcherMessage", "Mapfile had been externally modified. Please reload the map file if you want to continue."
+            "FileWatcherMessage", "Map file has been modified externally. Please reload the map."
         );
         CFinalSunApp::Instance->GetDialog()->MessageBox(
             message,

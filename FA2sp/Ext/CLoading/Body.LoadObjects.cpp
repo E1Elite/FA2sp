@@ -196,7 +196,12 @@ void CLoadingExt::LoadBuilding_Normal(ppmfc::CString ID)
 		ppmfc::CString file = name + ".SHP";
 		int nMix = SearchFile(file);
 		if (!CMixFile::HasFile(file, nMix))
-			return false;
+		{
+			file = name + this->GetFileExtension();
+			nMix = SearchFile(file);
+			if (!CMixFile::HasFile(file, nMix))
+				return false;
+		}
 
 		ShapeHeader header;
 		unsigned char* pBuffer;

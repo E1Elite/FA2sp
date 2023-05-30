@@ -53,8 +53,8 @@ void CMapValidatorExt::ValidateStructureOverlapping(BOOL& result)
 	{
 		if (Occupied[i].size() > 1)
 		{
-			if (!ExtConfigs::ExtendedValidationNoError)
-				result = FALSE;
+//			if (!ExtConfigs::ExtendedValidationNoError)
+//				result = FALSE;
 			auto buffer = Format;
 			buffer.ReplaceNumString(1, Occupied[i].size());
 			buffer.ReplaceNumString(2, CMapData::Instance->GetYFromCoordIndex(i));
@@ -65,7 +65,7 @@ void CMapValidatorExt::ValidateStructureOverlapping(BOOL& result)
 				buffer += ", ";
 			}
 			buffer += Occupied[i].back().c_str();
-			this->InsertStringAsError(buffer);
+			this->InsertString(buffer, true);
 		}
 	}
 }
@@ -77,15 +77,15 @@ void CMapValidatorExt::ValidateMissingParams(BOOL& result)
 		if (auto pSection = CMapData::Instance->INI.GetSection(section))
 		{
 			ppmfc::CString Format = this->FetchLanguageString(
-				"MV_LogicMissingParams", "%1 - %2 may has a missing param! Please have a check on it.");
+				"MV_LogicMissingParams", "%1 - %2 may have a missing param! Please check.");
 			Format.ReplaceNumString(1, section);
 
 			for (const auto& [key, value] : pSection->GetEntities())
 			{
 				if (value.Find(",,") != -1) // has missing param!
 				{
-					if (!ExtConfigs::ExtendedValidationNoError)
-						result = FALSE;
+//					if (!ExtConfigs::ExtendedValidationNoError)
+//						result = FALSE;
 					auto tmp = Format;
 					tmp.ReplaceNumString(2, key);
 					InsertStringAsError(tmp);

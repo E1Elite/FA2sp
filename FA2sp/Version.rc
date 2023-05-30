@@ -1,0 +1,32 @@
+#include <windows.h>
+#include "FA2sp.Constants.h"
+
+1 VERSIONINFO
+FILEVERSION PRODUCT_MAJOR,PRODUCT_MINOR,PRODUCT_REVISION,PRODUCT_HOTFIX
+PRODUCTVERSION PRODUCT_MAJOR,PRODUCT_MINOR,PRODUCT_REVISION
+FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+FILEFLAGS VS_FF_PRERELEASE | VS_FF_SPECIALBUILD
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_DLL
+BEGIN
+ BLOCK "StringFileInfo"
+ BEGIN
+  BLOCK "040904b0"
+  BEGIN
+   VALUE "ProductName", PRODUCT_NAME "\0"
+   VALUE "CompanyName", "FA2sp Contributors\0"
+   VALUE "LegalCopyright", "© FA2sp Contributors 2020-2021\0"
+   VALUE "FileDescription", "FA2sp DLL patches FinalAlert2, a map editor for Red Alert 2 and Yuri's Revenge games.\0"
+   VALUE "FileVersion", PRODUCT_STR "\0"
+   VALUE "ProductVersion", VERSION_STRVER "\0"
+   VALUE "InternalName", "fa2sp.dll\0"
+   VALUE "OriginalFilename", "FA2sp.dll\0"
+   VALUE "SpecialBuild", "Testing version. Use at your own risk.\0"
+  END
+ END
+
+ BLOCK "VarFileInfo"
+ BEGIN
+  VALUE "Translation", 0x0409, 1200
+ END
+END

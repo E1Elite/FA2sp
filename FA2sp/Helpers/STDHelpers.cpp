@@ -48,6 +48,31 @@ std::vector<ppmfc::CString> STDHelpers::SplitString(const ppmfc::CString& pSourc
     return ret;
 }
 
+std::vector<ppmfc::CString> STDHelpers::SplitStringTrimmed(const ppmfc::CString& pSource, const char* pSplit)
+{
+	std::vector<ppmfc::CString> ret;
+	if (pSource.GetLength() == 0)
+		return ret;
+
+	int nIdx = 0;
+	ppmfc::CString temp;
+	while (true)
+	{
+		int nPos = pSource.Find(pSplit, nIdx);
+		if (nPos == -1)
+			break;
+
+		temp = pSource.Mid(nIdx, nPos - nIdx);
+		TrimString(temp);
+		ret.push_back(temp);
+		nIdx = nPos + 1;
+	}
+	temp = pSource.Mid(nIdx);
+	TrimString(temp);
+	ret.push_back(temp);
+	return ret;
+}
+
 int STDHelpers::ParseToInt(const char* pSource, int nDefault)
 {
     int ret;

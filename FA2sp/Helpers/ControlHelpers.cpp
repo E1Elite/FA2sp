@@ -101,4 +101,51 @@ namespace ControlHelpers
         }
 
     }
+
+    bool ComboBox::LoadSectionList(ppmfc::CComboBox& combobox, const char* pSection, int pLoadFrom, bool bShowIndex)
+    {
+        combobox.DeleteAllStrings();
+		bool ret = false;
+        MultimapHelper mmh;
+		switch (pLoadFrom)
+		{
+		default :
+		case 0:
+			mmh.AddINI(&CINI::FAData());
+			break;
+		case 1:
+			mmh.AddINI(&CINI::Rules());
+			break;
+		case 2:
+	        mmh.AddINI(&CINI::Rules());
+			mmh.AddINI(&CINI::CurrentDocument());
+			break;
+		case 3:
+			mmh.AddINI(&CINI::CurrentDocument());
+			break;
+		}
+
+        auto& entries = mmh.ParseIndicies(pSection, true);
+		if (entries.size() > 0)
+		{
+			CString buffer;
+			for (size_t i = 0, sz = entries.size(); i < sz; ++i)
+			{
+				if (bShowIndex)
+					buffer.Format("%u - %s", i, entries[i]);
+				else
+					buffer = entries[i];
+				combobox.SetItemData(combobox.AddString(buffer), i);
+			}
+			ret = true;
+		}
+		return ret;
+    }
+
+    void ComboBox::LoadHousesAddon(ppmfc::CComboBox& combobox, bool bShowIndex)
+    {
+        combobox.SetItemData(combobox.AddString("-1 - Non-Neutral Random House"), -1);
+        combobox.SetItemData(combobox.AddString("-2 - First Neutral House"), -2);
+        combobox.SetItemData(combobox.AddString("-3 - Random Human Player"), -3);
+	}
 }

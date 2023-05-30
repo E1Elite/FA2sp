@@ -27,6 +27,7 @@ BOOL CALLBACK CAllieEditor::DlgProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM l
 		HWND hETCurrent = GetDlgItem(hwnd, 6304);
 
 		std::set<ppmfc::CString> allies;
+		allies.insert(currentCountry);
 		cHouses.CETAllies.GetWindowText(FA2sp::Buffer);
 		for (auto& str : STDHelpers::SplitString(FA2sp::Buffer))
 			if (!STDHelpers::IsNoneOrEmpty(str))
@@ -77,6 +78,10 @@ BOOL CALLBACK CAllieEditor::DlgProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM l
 			{
 			case IDOK: {
 				ppmfc::CString allies = "";
+				cHouses.CCBHouses.GetWindowText(allies);
+				allies.Trim();
+				if (!STDHelpers::IsNoneOrEmpty(allies))
+					allies += ",";
 				HWND LBA = GetDlgItem(hwnd, 6302);//Allies ListBox
 				int cnt = SendMessage(LBA, LB_GETCOUNT, NULL, NULL);
 				for (int i = 0; i < cnt - 1; ++i)

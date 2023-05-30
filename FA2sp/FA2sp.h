@@ -67,6 +67,7 @@ public:
     static bool ExtendedValidationNoError;
     static bool HideNoRubbleBuilding;
     static bool ModernObjectBrowser;
+    static bool LoadRA2MixFilesOnly;
 };
 
 class Variables

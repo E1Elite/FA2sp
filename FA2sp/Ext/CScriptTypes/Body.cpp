@@ -128,6 +128,9 @@ void CScriptTypesExt::UpdateParams(int actionIndex)
 	case 20:
 		CScriptTypesFunctions::CScriptTypes_LoadParams_Boolean(this->CCBScriptParameter);
 		break;
+	case 21:
+		CScriptTypesFunctions::CScriptTypes_LoadParams_CameraSpeed(this->CCBScriptParameter);
+		break;
 	}
 	if (param.Param_ < 0)
 		CScriptTypesFunctions::CScriptTypes_LoadParams_TypeList(this->CCBScriptParameter, -param.Param_);
@@ -155,6 +158,7 @@ void CScriptTypesExt::UpdateParams(int actionIndex)
 
 std::map<int, CScriptTypeAction> CScriptTypeAction::ExtActions;
 std::map<int, CScriptTypeParam> CScriptTypeParam::ExtParams;
+std::map<int, CScriptTypeParamCustom> CScriptTypeParamCustom::ExtParamsCustom;
 std::map<int, int> CScriptTypesExt::RealScriptID;
 BOOL CScriptTypesExt::OnInitDialogExt()
 {
@@ -219,6 +223,52 @@ BOOL CScriptTypesExt::OnInitDialogExt()
 				[[fallthrough]];
 			case 1:
 				CScriptTypeParam::ExtParams[id].Label_ = pParseBuffer[0];
+				SAFE_RELEASE(pParseBuffer[0]);
+			case 0:
+				continue;
+			}
+		}
+	}
+
+	if (auto entities = ini.GetSection("ScriptParamTypes"))
+	{
+		char* pParseBuffer[5] = { nullptr };
+		int pParsedVal = 0;
+		for (auto& pair : entities->GetEntities())
+		{
+			int id = atoi(pair.first);
+			if (id < 0) continue;
+			auto count =
+				ParseList(pair.second, (const char**)(pParseBuffer), 5);
+			switch (count)
+			{
+			default:
+			case 5:
+				STDHelpers::TrimString((ppmfc::CString)pParseBuffer[4]);
+				CScriptTypeParamCustom::ExtParamsCustom[id].XtraSection_ = pParseBuffer[4];
+				SAFE_RELEASE(pParseBuffer[4]);
+				[[fallthrough]];
+			case 4:
+				pParsedVal = atoi((const char*)pParseBuffer[3]);
+				CScriptTypeParamCustom::ExtParamsCustom[id].HasExtraParam_ = pParsedVal > 0 ? pParsedVal : 0;
+				pParsedVal = 0;
+				SAFE_RELEASE(pParseBuffer[3]);
+				[[fallthrough]];
+			case 3:
+				pParsedVal = atoi((const char*)pParseBuffer[2]);
+				CScriptTypeParamCustom::ExtParamsCustom[id].ShowIndex_ = pParsedVal > 0 ? true : false;
+				pParsedVal = 0;
+				SAFE_RELEASE(pParseBuffer[2]);
+				[[fallthrough]];
+			case 2:
+				pParsedVal = atoi((const char*)pParseBuffer[1]);
+				CScriptTypeParamCustom::ExtParamsCustom[id].LoadFrom_ = pParsedVal > 0 ? pParsedVal : 0;
+				pParsedVal = 0;
+				SAFE_RELEASE(pParseBuffer[1]);
+				[[fallthrough]];
+			case 1:
+				STDHelpers::TrimString((ppmfc::CString)pParseBuffer[0]);
+				CScriptTypeParamCustom::ExtParamsCustom[id].Section_ = pParseBuffer[0];
 				SAFE_RELEASE(pParseBuffer[0]);
 				[[fallthrough]];
 			case 0:
@@ -323,16 +373,7 @@ void CScriptTypesExt::OnCBCurrentScriptSelectChanged()
 	ExtCurrentScript->Set(currentID);
 	for (int i = 0; i < ExtCurrentScript->Count; ++i)
 	{
-		if (ExtCurrentScript->IsExtraParamEnabledAtLine(i))
-			FA2sp::Buffer.Format("[%d] : %d - (%d, %d)", i,
-				ExtCurrentScript->Actions[i].Type,
-				ExtCurrentScript->Actions[i].ParamNormal,
-				ExtCurrentScript->Actions[i].ParamExt);
-		else
-			FA2sp::Buffer.Format("[%d] : %d - %d", i, 
-				ExtCurrentScript->Actions[i].Type, 
-				ExtCurrentScript->Actions[i].Param);
-
+		FA2sp::Buffer.Format("[%d] : %d - %d", i, ExtCurrentScript->Actions[i].Type, ExtCurrentScript->Actions[i].Param);
 		this->CLBScriptActions.AddString(FA2sp::Buffer);
 	}
 
@@ -439,16 +480,7 @@ void CScriptTypesExt::OnCBScriptParameterEditChanged()
 	ExtCurrentScript->WriteLine(index);
 
 	this->CLBScriptActions.DeleteString(index);
-	if (ExtCurrentScript->IsExtraParamEnabledAtLine(index))
-		FA2sp::Buffer.Format("[%d] : %d - (%d, %d)", index,
-			ExtCurrentScript->Actions[index].Type,
-			ExtCurrentScript->Actions[index].ParamNormal,
-			ExtCurrentScript->Actions[index].ParamExt);
-	else
-		FA2sp::Buffer.Format("[%d] : %d - %d", index,
-			ExtCurrentScript->Actions[index].Type,
-			ExtCurrentScript->Actions[index].Param);
-
+	FA2sp::Buffer.Format("[%d] : %d - %d", index, ExtCurrentScript->Actions[index].Type, ExtCurrentScript->Actions[index].Param);
 	this->CLBScriptActions.InsertString(index, FA2sp::Buffer);
 	this->CLBScriptActions.SetCurSel(index);
 }

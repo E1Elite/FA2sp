@@ -17,6 +17,7 @@ class STDHelpers
 public:
     static std::vector<ppmfc::CString> SplitString(const ppmfc::CString& pSource, const char* pSplit = ",");
     static std::vector<ppmfc::CString> SplitString(const ppmfc::CString& pSource, size_t nth, const char* pSplit = ",");
+    static std::vector<ppmfc::CString> SplitStringTrimmed(const ppmfc::CString& pSource, const char* pSplit = ",");
     static int ParseToInt(const char* pSource, int nDefault = 0);
     static bool IsNullOrEmpty(const char* pSource);
     static bool IsNullOrWhitespace(const char* pSource);

@@ -50,8 +50,8 @@ DEFINE_HOOK(43CE50, Miscs_LoadParamToCombobox, 7)
         pComboBox->AddString("27 - Paradrop overlay drop zone");
         pComboBox->AddString("28 - Wait");
         pComboBox->AddString("29 - Attack again");
-        pComboBox->AddString("30 - Spyplane approach");
-        pComboBox->AddString("31 - Spyplane overfly");
+        pComboBox->AddString("30 - Spyplane approach (YR)");
+        pComboBox->AddString("31 - Spyplane overfly (YR)");
         break;
     case 32: // Targets
         pComboBox->DeleteAllStrings();
@@ -122,6 +122,25 @@ DEFINE_HOOK(43CE50, Miscs_LoadParamToCombobox, 7)
         break;
     case 39: // SuperWeaponTypes (ID)
         ControlHelpers::ComboBox::LoadGenericList(*pComboBox, "SuperWeaponTypes", true, false, true);
+        break;
+    case 40: // Variable Operators
+		pComboBox->DeleteAllStrings();
+		pComboBox->AddString("0 - Assign (=)");
+		pComboBox->AddString("1 - Add (+)");
+		pComboBox->AddString("2 - Subtract (-)");
+		pComboBox->AddString("3 - Multiply (*)");
+		pComboBox->AddString("4 - Divide (/)");
+		pComboBox->AddString("5 - Modulus (%)");
+		pComboBox->AddString("6 - Left Shift (<<)");
+		pComboBox->AddString("7 - Right Shift (>>)");
+		pComboBox->AddString("8 - Complement (~)");
+		pComboBox->AddString("9 - XOR");
+		pComboBox->AddString("10 - OR");
+		pComboBox->AddString("11 - AND");
+		break;
+    case 41: // House Addons
+        ControlHelpers::ComboBox::LoadHouses(*pComboBox, true);
+        ControlHelpers::ComboBox::LoadHousesAddon(*pComboBox, true);
         break;
     default: // Not a valid param
         break;

@@ -140,8 +140,8 @@ void CTileSetBrowserFrameExt::InitTabControl()
 		TabCtrl_InsertItem(this->hTabCtrl, i++, &pitem);
 	};
 
-	insertItem("Tile placement", "TabPages.TilePlacement");
-	insertItem("Trigger sort", "TabPages.TriggerSort");
+	insertItem("Tiles && Overlays", "TabPages.TilePlacement");
+	insertItem("Trigger Sort", "TabPages.TriggerSort");
 	
 	// Create the pages
 	TriggerSort::Instance.Create(hTabCtrl);

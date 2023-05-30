@@ -5,12 +5,13 @@
 
 #define PRODUCT_MAJOR 1
 #define PRODUCT_MINOR 6
-#define PRODUCT_REVISION 2
+#define PRODUCT_REVISION 1
+#define PRODUCT_HOTFIX 2
 
 #ifdef NDEBUG
-#define PRODUCT_STR __str(PRODUCT_MAJOR) "." __str(PRODUCT_MINOR) "." __str(PRODUCT_REVISION)
+#define PRODUCT_STR __str(PRODUCT_MAJOR) "." __str(PRODUCT_MINOR) "." __str(PRODUCT_REVISION) "." __str(PRODUCT_HOTFIX)
 #else
-#define PRODUCT_STR __DATE__ " " __TIME__
+#define PRODUCT_STR __str(PRODUCT_MAJOR) "." __str(PRODUCT_MINOR) "." __str(PRODUCT_REVISION) "." __str(PRODUCT_HOTFIX) ".Debug"
 #endif
 
 #define DISPLAY_STR PRODUCT_STR
