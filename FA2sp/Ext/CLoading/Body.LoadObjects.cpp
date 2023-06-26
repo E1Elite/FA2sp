@@ -36,9 +36,9 @@ ppmfc::CString CLoadingExt::GetBuildingImageName(ppmfc::CString ID, int nFacing,
 		else // hide rubble
 			ID = "\233\144\241"; // invalid string to get it empty
 	}
-	else // GBIN_NORMAL
+	else // GBIN_NORMAL or base nodes
 	{
-		ID.Format("%s%d\233NORMAL", ID, nFacing);
+		ID.Format("%s%d", ID, nFacing);
 	}
 	return ID;
 }
@@ -383,7 +383,7 @@ void CLoadingExt::LoadBuilding_Normal(ppmfc::CString ID)
 					int width1, height1;
 
 					UnionSHP_GetAndClear(pImage, &width1, &height1);
-					DictName.Format("%s%d\233NORMAL", ID, i);
+					DictName.Format("%s%d", ID, i);
 					SetImageData(pImage, DictName, width1, height1, PalettesManager::LoadPalette(PaletteName));
 				}
 
@@ -408,7 +408,7 @@ void CLoadingExt::LoadBuilding_Normal(ppmfc::CString ID)
 					int width1, height1;
 					UnionSHP_GetAndClear(pImage, &width1, &height1);
 
-					DictName.Format("%s%d\233NORMAL", ID, i);
+					DictName.Format("%s%d", ID, i);
 					SetImageData(pImage, DictName, width1, height1, PalettesManager::LoadPalette(PaletteName));
 				}
 				GameDelete(pBuffer);
@@ -416,7 +416,7 @@ void CLoadingExt::LoadBuilding_Normal(ppmfc::CString ID)
 		}
 		else // No turret
 		{
-			DictName.Format("%s%d\233NORMAL", ID, 0);
+			DictName.Format("%s%d", ID, 0);
 			SetImageData(pBuffer, DictName, width, height, PalettesManager::LoadPalette(PaletteName));
 		}
 	}

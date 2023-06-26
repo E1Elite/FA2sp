@@ -11,9 +11,9 @@ DEFINE_HOOK(502E66, CTriggerOption_OnInitDialog_RepeatTypeFix, 7)
     pThis->CCBHouse.DeleteAllStrings();
     pThis->CCBRepeatType.DeleteAllStrings();
 
-    pThis->CCBRepeatType.AddString(Translations::TranslateOrDefault("TriggerRepeatType.OneTimeOr", "0 - One Time OR"));
-    pThis->CCBRepeatType.AddString(Translations::TranslateOrDefault("TriggerRepeatType.OneTimeAnd", "1 - One Time AND"));
-    pThis->CCBRepeatType.AddString(Translations::TranslateOrDefault("TriggerRepeatType.RepeatingOr", "2 - Repeating OR"));
+    pThis->CCBRepeatType.AddString(Translations::TranslateOrDefault("TriggerRepeatType.OneTimeOr", "0 - Volatile (Any attached satisfy, fire once)"));
+    pThis->CCBRepeatType.AddString(Translations::TranslateOrDefault("TriggerRepeatType.OneTimeAnd", "1 - Semi-persistent (All attached satisfy, fire once)"));
+    pThis->CCBRepeatType.AddString(Translations::TranslateOrDefault("TriggerRepeatType.RepeatingOr", "2 - Persistent (Any attached satisfy, fire repeatedly)"));
 
     return 0;
 }
